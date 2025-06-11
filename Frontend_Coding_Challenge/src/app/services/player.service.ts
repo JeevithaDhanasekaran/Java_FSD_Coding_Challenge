@@ -33,6 +33,10 @@ export class PlayerService {
   }
 
   updateTotalMatches(id: number, totalMatch: number): Observable<string> {
-    return this.http.put<string>(`${this.baseUrl}/${id}/${totalMatch}`,null);
+    return this.http.put<string>(`${this.baseUrl}/${id}/${totalMatch}`, null);
+  }
+
+  searchPlayersByName(name: string): Observable<PlayerOutputDTO[]> {
+    return this.http.get<PlayerOutputDTO[]>(`${this.baseUrl}/search?name=${name}`);
   }
 }

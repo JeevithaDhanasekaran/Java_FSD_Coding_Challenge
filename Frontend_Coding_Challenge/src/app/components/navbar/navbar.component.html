@@ -11,6 +11,12 @@
           <a class="nav-link" routerLink="/add">Add Player</a>
         </li>
       </ul>
+
+      <form class="d-flex" (ngSubmit)="onSearch()">
+        <input class="form-control me-2" type="search" placeholder="Search by name" [(ngModel)]="searchName" name="searchName">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+
     </div>
   </div>
 </nav>

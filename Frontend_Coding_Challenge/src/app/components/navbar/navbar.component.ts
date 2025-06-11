@@ -6,4 +6,13 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
+
+  @Output() search = new EventEmitter<string>();
+  searchName: string = '';
+
+  onSearch(): void {
+    this.search.emit(this.searchName.trim());
+    
+  }
+
 }
