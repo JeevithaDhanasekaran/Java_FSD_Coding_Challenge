@@ -68,10 +68,10 @@ public class PlayerServiceImpl implements IPlayerService {
 	}
 
 	@Override
-	public PlayerOutputDTO getPlayerById(Long playerId) {
+	public PlayerDTO getPlayerById(Long playerId) {
 		Player player = playerRepository.findById(playerId)
                 .orElseThrow(() -> new ResourceNotFoundException("Player with Given Id is not Found. ID"+playerId));
-        return toOutputDTO(player);
+        return convertToDTO(player);
 	}
 
 	@Override
@@ -100,6 +100,14 @@ public class PlayerServiceImpl implements IPlayerService {
 	        throw new ResourceNotFoundException("Player with Given Id is not Found. ID"+playerId);
 	    }
 	    return playerRepository.updatePlayerTotalMatch(playerId, newTotalMatch);
+	}
+	
+	@Override
+	public List<PlayerOutputDTO> searchPlayersByName(String name) {
+	    List<Player> matchedPlayers = playerRepository.findByPlayerNameContainingIgnoreCase(name);
+	    return matchedPlayers.stream()
+	            .map(this::toOutputDTO)
+	            .collect(Collectors.toList());
 	}
 	
 	private PlayerOutputDTO toOutputDTO(Player player) {

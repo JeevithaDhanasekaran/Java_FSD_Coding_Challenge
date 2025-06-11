@@ -10,11 +10,13 @@ public interface IPlayerService {
 
 	PlayerDTO updatePlayer(Long playerId, PlayerDTO playerDTO);
 
-	PlayerOutputDTO getPlayerById(Long playerId);
+	PlayerDTO getPlayerById(Long playerId);
 
 	List<PlayerOutputDTO> getAllPlayers();
 
 	void deletePlayer(Long playerId);
 
 	int updatePlayerTotalMatch(Long playerId, int newTotalMatch);
+	
+	List<PlayerOutputDTO> searchPlayersByName(String name);
 }

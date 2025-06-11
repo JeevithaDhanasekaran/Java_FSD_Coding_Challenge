@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hexaware.cricketteammanagement.dto.PlayerDTO;
@@ -20,6 +22,7 @@ import com.hexaware.cricketteammanagement.service.IPlayerService;
 
 import jakarta.validation.Valid;
 
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/api/players")
 public class PlayerRestController {
@@ -40,8 +43,8 @@ public class PlayerRestController {
 	}
 
 	@GetMapping("/{playerId}")
-	public ResponseEntity<PlayerOutputDTO> getPlayerById(@PathVariable Long playerId) {
-		PlayerOutputDTO player = playerService.getPlayerById(playerId);
+	public ResponseEntity<PlayerDTO> getPlayerById(@PathVariable Long playerId) {
+		PlayerDTO player = playerService.getPlayerById(playerId);
 		return new ResponseEntity<>(player, HttpStatus.OK);
 	}
 
@@ -64,6 +67,12 @@ public class PlayerRestController {
 			return ResponseEntity.ok("Player Updated with new TotalMatch count successfully");
 		}
 		return new ResponseEntity<>("Couldn't update Match Count", HttpStatus.BAD_REQUEST);
+	}
+	
+	@GetMapping("/search")
+	public ResponseEntity<List<PlayerOutputDTO>> searchPlayers(@RequestParam String name) {
+	    List<PlayerOutputDTO> players = playerService.searchPlayersByName(name);
+	    return new ResponseEntity<>(players, HttpStatus.OK);
 	}
 
 }
