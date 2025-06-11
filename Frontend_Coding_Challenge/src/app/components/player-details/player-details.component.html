@@ -1,0 +1,18 @@
+<div class="container mt-4" *ngIf="player">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">Player Details - {{ player.playerName }}</h4>
+    </div>
+    <div class="card-body">
+      <p><strong>Jersey Number:</strong> {{ player.jerseyNumber }}</p>
+      <p><strong>Role:</strong> {{ player.role }}</p>
+      <p><strong>Total Matches:</strong> {{ player.totalMatches }}</p>
+      <p><strong>Team Name:</strong> {{ player.teamName }}</p>
+      <p><strong>Country/State:</strong> {{ player.countryOrStateName }}</p>
+      <p><strong>Description:</strong> {{ player.description }}</p>
+    </div>
+    <div class="card-footer text-end">
+      <button class="btn btn-secondary" (click)="goBack()">Back to List</button>
+    </div>
+  </div>
+</div>

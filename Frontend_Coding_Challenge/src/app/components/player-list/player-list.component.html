@@ -1,0 +1,30 @@
+<div class="container mt-4">
+  <h2 class="mb-3">Cricket Players</h2>
+  <button class="btn btn-primary mb-3" routerLink="/add">Add Player</button>
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Jersey</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let player of players">
+        <td>{{ player.playerId }}</td>
+        <td>{{ player.playerName }}</td>
+        <td>{{ player.jerseyNumber }}</td>
+        <td>{{ player.role }}</td>
+        <td class="text-center">
+          <div class="d-flex justify-content-center gap-2">
+            <button class="btn btn-sm btn-info" (click)="viewPlayer(player.playerId)">View</button>
+            <button class="btn btn-sm btn-warning" (click)="editPlayer(player.playerId)">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deletePlayer(player.playerId)">Delete</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
